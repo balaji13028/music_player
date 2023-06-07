@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:music_player/color_palette.dart';
 import 'package:music_player/controller/pagecontroller.dart';
 import 'package:music_player/model_classes.dart/recent_favourites.dart';
@@ -76,7 +74,7 @@ class SearchPage extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 5,
-                      mainAxisExtent: 200,
+                      mainAxisExtent: 180,
                       crossAxisSpacing: 20),
                   itemBuilder: ((context, index) {
                     var fav = favouritesList[index];

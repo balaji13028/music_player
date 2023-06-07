@@ -8,4 +8,9 @@ class ColorPalette {
   static const Color titleColor = Colors.white;
 
   static const Color subtitleColor = Colors.white38;
+
+  static const LinearGradient buttonGradient = LinearGradient(colors: [
+    Color(0xff322888),
+    Color(0xff492C94),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight);
 }

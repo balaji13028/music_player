@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:music_player/color_palette.dart';
+
+import 'model_classes.dart/song_category.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -82,97 +85,204 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-              color: Colors.transparent,
-              height: size.height * 0.25,
-              width: size.width,
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(left: 25),
-                  scrollDirection: Axis.horizontal,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: ((context, index) {
-                    return Container(
-                      width: size.width * 0.58,
-                      margin:
-                          const EdgeInsets.only(right: 15, top: 15, bottom: 10),
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: ColorPalette.buttonsBackgroundColor,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Stack(
-                        children: [
-                          const Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: Icon(
-                                Icons.more_horiz_rounded,
-                                size: 28,
-                                color: ColorPalette.titleColor,
-                              ),
-                            ),
+            color: Colors.transparent,
+            height: size.height * 0.25,
+            width: size.width,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(left: 25),
+              scrollDirection: Axis.horizontal,
+              physics: const ClampingScrollPhysics(),
+              itemCount: 6,
+              itemBuilder: ((context, index) {
+                return Container(
+                  width: size.width * 0.58,
+                  margin: const EdgeInsets.only(right: 15, top: 15, bottom: 10),
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: ColorPalette.buttonsBackgroundColor,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Stack(
+                    children: [
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.more_horiz_rounded,
+                            size: 28,
+                            color: ColorPalette.titleColor,
                           ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: size.height * 0.08,
-                              decoration: BoxDecoration(
-                                color: Colors.primaries[Random()
-                                        .nextInt(Colors.primaries.length)]
-                                    .withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: size.height * 0.08,
+                          decoration: BoxDecoration(
+                            color: Colors.primaries[
+                                    Random().nextInt(Colors.primaries.length)]
+                                .withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Text(
+                                    'The Dark Side',
+                                    style: TextStyle(
+                                        color: ColorPalette.titleColor,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Row(
                                     children: [
-                                      const Text(
-                                        'The Dark Side',
-                                        style: TextStyle(
-                                            color: ColorPalette.titleColor,
-                                            fontWeight: FontWeight.w700),
+                                      Icon(
+                                        CupertinoIcons.music_note_2,
+                                        size: 15,
+                                        color: ColorPalette.titleColor,
                                       ),
-                                      const SizedBox(height: 2),
-                                      Row(
-                                        children: const [
-                                          Icon(
-                                            CupertinoIcons.music_note_2,
-                                            size: 15,
+                                      Text(
+                                        'Mute - The Dark Side',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 10,
                                             color: ColorPalette.titleColor,
-                                          ),
-                                          Text(
-                                            'Mute - The Dark Side',
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: ColorPalette.titleColor,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      )
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ],
-                                  ),
-                                  const Icon(
-                                    CupertinoIcons.play_circle_fill,
-                                    size: 45,
-                                    color: ColorPalette.titleColor,
-                                  ),
+                                  )
                                 ],
                               ),
-                            ),
+                              Icon(
+                                CupertinoIcons.play_circle_fill,
+                                size: 45,
+                                color: ColorPalette.titleColor,
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    );
-                  })))
+                    ],
+                  ),
+                );
+              }),
+            ),
+          ),
+          SizedBox(height: size.height * 0.025),
+          Container(
+              color: Colors.transparent,
+              height: size.height * 0.05,
+              width: size.width,
+              child: ListView.builder(
+                padding: const EdgeInsets.only(left: 20),
+                scrollDirection: Axis.horizontal,
+                itemCount: songCetegoryList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                        gradient:
+                            index == 0 ? ColorPalette.buttonGradient : null,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text(
+                      songCetegoryList[index].title.toString(),
+                      style: const TextStyle(color: ColorPalette.titleColor),
+                    ),
+                  );
+                },
+              )),
+          SizedBox(height: size.height * 0.02),
+          Expanded(
+              child: FutureBuilder(
+                  future: rootBundle.loadString('AssetManifest.json'),
+                  builder: (context, item) {
+                    if (item.connectionState == ConnectionState.waiting) {
+                      const CircularProgressIndicator();
+                    } else if (item.hasData) {
+                      final Map<String, dynamic> map = jsonDecode(item.data!);
+
+                      List songs = map.keys
+                          .where((element) => element.contains('.mp3'))
+                          .toList();
+
+                      return ListView.builder(
+                        itemCount: songs.length,
+                        itemBuilder: (context, index) {
+                          String title = songs[index]
+                              .split('/')
+                              .last
+                              .replaceAll('.mp3', '')
+                              .toString();
+
+                          return Container(
+                            alignment: Alignment.center,
+                            height: size.height * 0.08,
+                            decoration: BoxDecoration(
+                              color: Colors.primaries[
+                                      Random().nextInt(Colors.primaries.length)]
+                                  .withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      title.toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: ColorPalette.titleColor,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          CupertinoIcons.music_note_2,
+                                          size: 15,
+                                          color: ColorPalette.titleColor,
+                                        ),
+                                        Text(
+                                          'Mute - The Dark Side',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: ColorPalette.titleColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Icon(
+                                  CupertinoIcons.play_circle_fill,
+                                  size: 45,
+                                  color: ColorPalette.titleColor,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('No songs in the assets'),
+                      );
+                    }
+                    return SizedBox();
+                  }))
         ],
       )),
     );

@@ -39,7 +39,7 @@ class BottomNavBar extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           height: size.height * 0.09,
           width: size.width,
-          margin: const EdgeInsets.only(right: 20, top: 10, left: 20),
+          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
           decoration: BoxDecoration(
             color: ColorPalette.buttonsBackgroundColor,
             borderRadius: BorderRadius.circular(20),
