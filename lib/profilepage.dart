@@ -6,12 +6,17 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: ColorPalette.screenBackColor,
-      body: Center(
-        child: Text(
-          'profile page',
-          style: TextStyle(color: Colors.white, fontSize: 24),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: ColorPalette.backgroundGradient,
+        ),
+        child: const Center(
+          child: Text(
+            'profile page',
+            style: TextStyle(color: Colors.white, fontSize: 24),
+          ),
         ),
       ),
     );

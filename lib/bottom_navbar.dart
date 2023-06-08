@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,14 +20,22 @@ class BottomNavBar extends StatelessWidget {
         Get.put(LandingPageController());
     return Scaffold(
       backgroundColor: ColorPalette.screenBackColor,
-      bottomNavigationBar: bottomnavibar(size, landingPageController),
-      body: Obx(() => IndexedStack(
-            index: landingPageController.tabIndex.value,
-            children: const [
-              HomePage(),
-              SearchPage(),
-              MusicPage(),
-              ProfilePage(),
+      body: Obx(() => Stack(
+            children: [
+              IndexedStack(
+                index: landingPageController.tabIndex.value,
+                children: const [
+                  HomePage(),
+                  SearchPage(),
+                  MusicPage(),
+                  ProfilePage(),
+                ],
+              ),
+              //Bottom nav bar alignment.
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: bottomnavibar(size, landingPageController),
+              )
             ],
           )),
     );
@@ -39,13 +49,18 @@ class BottomNavBar extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           height: size.height * 0.09,
           width: size.width,
-          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
+          margin: const EdgeInsets.only(
+            right: 15,
+            left: 15,
+            bottom: 5,
+          ),
           decoration: BoxDecoration(
-            color: ColorPalette.buttonsBackgroundColor,
+            color: ColorPalette.buttonsBackgroundColor.withOpacity(0.4),
             borderRadius: BorderRadius.circular(20),
           ),
           child: BottomNavigationBar(
-            backgroundColor: ColorPalette.buttonsBackgroundColor,
+            backgroundColor:
+                ColorPalette.buttonsBackgroundColor.withOpacity(0.9),
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -101,7 +116,6 @@ class BottomNavBar extends StatelessWidget {
                   size: 26,
                 ),
                 label: 'Home',
-                //  backgroundColor: Colors.red,
               ),
             ],
             selectedItemColor: Colors.white60,

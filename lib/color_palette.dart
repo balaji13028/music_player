@@ -13,4 +13,10 @@ class ColorPalette {
     Color(0xff322888),
     Color(0xff492C94),
   ], begin: Alignment.topLeft, end: Alignment.bottomRight);
+
+  static const LinearGradient backgroundGradient = LinearGradient(colors: [
+    Color(0xff362349),
+    Color(0xff232241),
+    Color(0xff1e223d),
+  ], begin: Alignment.topLeft, end: Alignment.center);
 }
