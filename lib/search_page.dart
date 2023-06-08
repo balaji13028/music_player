@@ -21,6 +21,7 @@ class SearchPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
+            // Top menu and fav option <-- start -->
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(
                 height: size.height * 0.058,
@@ -51,6 +52,7 @@ class SearchPage extends StatelessWidget {
                 ),
               ),
             ]),
+            // Top menu and fav option <-- End -->
             SizedBox(height: size.height * 0.03),
             const Padding(
               padding: EdgeInsets.only(left: 20),
@@ -63,7 +65,7 @@ class SearchPage extends StatelessWidget {
                 ),
               ),
             ),
-            //List of favourites
+            // List of favourites list <-- start -->
             Expanded(
               child: GridView.builder(
                 padding:
@@ -112,7 +114,8 @@ class SearchPage extends StatelessWidget {
                   );
                 }),
               ),
-            )
+            ),
+            // List of favourites list <-- End -->
           ],
         ),
       ),

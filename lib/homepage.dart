@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
+              // Top menu and search option <-- Start -->
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -102,6 +103,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              // Top menu and search option <-- End -->
+
               SizedBox(height: size.height * 0.038),
               const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -114,6 +117,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+
+              // List of horizontal song list <-- Start -->
               Container(
                 color: Colors.transparent,
                 height: size.height * 0.25,
@@ -254,7 +259,11 @@ class _HomePageState extends State<HomePage> {
                           }),
                         ))),
               ),
+              // List of horizontal song list <-- End -->
+
               SizedBox(height: size.height * 0.025),
+
+              // List of song categories <-- Start -->
               Container(
                   color: Colors.transparent,
                   height: size.height * 0.05,
@@ -280,7 +289,11 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   )),
+              // List of song categories <-- End -->
+
               SizedBox(height: size.height * 0.02),
+
+              // List of song list <-- start -->
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) =>
@@ -291,27 +304,27 @@ class _HomePageState extends State<HomePage> {
                     isplaying.add(false);
 
                     return ListTile(
-                      onTap: () async {
-                        if (isplaying[index] == true) {
-                          setState(() {
-                            isplaying[index] = false;
-                            isplaying.clear();
-                          });
-                          pausemusic();
-                        } else {
-                          await audioPlayer.open(
-                            Audio(
-                              songslist[index].song!,
-                            ),
-                            autoStart: false,
-                          );
-                          playmusic();
+                      // onTap: () async {
+                      //   if (isplaying[index] == true) {
+                      //     setState(() {
+                      //       isplaying[index] = false;
+                      //       isplaying.clear();
+                      //     });
+                      //     pausemusic();
+                      //   } else {
+                      //     await audioPlayer.open(
+                      //       Audio(
+                      //         songslist[index].song!,
+                      //       ),
+                      //       autoStart: false,
+                      //     );
+                      //     playmusic();
 
-                          setState(() {
-                            isplaying[index] = true;
-                          });
-                        }
-                      },
+                      //     setState(() {
+                      //       isplaying[index] = true;
+                      //     });
+                      //   }
+                      // },
                       visualDensity: VisualDensity.standard,
                       leading: Container(
                         clipBehavior: Clip.hardEdge,
@@ -366,7 +379,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 ),
-              )
+              ),
+              // List of song list <-- End -->
             ],
           )),
         ),
